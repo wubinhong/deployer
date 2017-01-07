@@ -1,0 +1,210 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="ie9" data-ng-app="frontend"><![endif]-->
+<![if IE 9 ]><html data-ng-app="frontend"><![endif]>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>蛋蛋部署系统</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor-login.css -->
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.css" />
+    <link rel="stylesheet" href="../bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" />
+    <!-- endbuild -->
+
+    <!-- CSS -->
+    <!-- build:css({.tmp/serve,src}) assets/css/app-login.css -->
+    <link href="assets/css/app.min.1.css" rel="stylesheet">
+    <link href="assets/css/app.min.2.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <style>
+        /**
+         * fix up css bug for vertically center
+         */
+        .lc-block {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+<body class="login-content" data-ng-controller="LoginController as lctrl">
+<!-- Login -->
+<div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+        <div class="fg-line">
+            <input type="text" class="form-control" placeholder="用户名" data-ng-model="lctrl.loginModel.username">
+        </div>
+    </div>
+
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+        <div class="fg-line">
+            <input type="password" class="form-control" placeholder="密码" data-ng-model="lctrl.loginModel.password">
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="" data-ng-model="lctrl.loginModel.keep">
+            <i class="input-helper"></i>
+            记住密码
+        </label>
+    </div>
+
+    <a class="btn btn-login btn-danger btn-float" data-ng-click="lctrl.doLogin()"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.login = 0; lctrl.register = 1">注册</li>
+        <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.login = 0; lctrl.forgot = 1">忘记密码?</li>
+    </ul>
+</div>
+
+<!-- Register -->
+<div class="lc-block" id="l-register" data-ng-class="{ 'toggled': lctrl.register === 1 }" data-ng-if="lctrl.register === 1">
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+        <div class="fg-line">
+            <input type="text" class="form-control" placeholder="用户名" data-ng-model="lctrl.registerModel.username">
+        </div>
+    </div>
+
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+        <div class="fg-line">
+            <input type="text" class="form-control" placeholder="真实姓名" data-ng-model="lctrl.registerModel.name">
+        </div>
+    </div>
+
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-shield-security"></i></span>
+        <div class="fg-line">
+            <input type="password" class="form-control" placeholder="密码" data-ng-model="lctrl.registerModel.password">
+        </div>
+    </div>
+
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+        <div class="fg-line">
+            <input type="text" class="form-control" placeholder="邮箱地址" data-ng-model="lctrl.registerModel.email">
+        </div>
+    </div>
+
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-smartphone-iphone"></i></span>
+        <div class="fg-line">
+            <input type="text" class="form-control" placeholder="手机号" data-ng-model="lctrl.registerModel.phoneNum">
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="" data-ng-model="lctrl.registerModel.agree">
+            <i class="input-helper"></i>
+            同意注册条款
+        </label>
+    </div>
+
+    <a class="btn btn-login btn-danger btn-float" data-ng-click="lctrl.doRegister()">
+        <i class="zmdi zmdi-arrow-forward"></i>
+    </a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.register = 0; lctrl.login = 1">登陆</li>
+        <li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.register = 0; lctrl.forgot = 1">忘记密码?</li>
+    </ul>
+</div>
+
+<!-- Forgot Password -->
+<div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.forgot === 1 }" data-ng-if="lctrl.forgot === 1">
+    <p class="text-left">如果您忘记了登陆密码，可以通过注册邮箱找回密码，请输入注册邮箱，以便找回您的密码</p>
+
+    <div class="input-group m-b-20">
+        <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
+        <div class="fg-line">
+            <input type="text" class="form-control" placeholder="邮箱" data-ng-model="lctrl.email">
+        </div>
+    </div>
+
+    <a class="btn btn-login btn-danger btn-float" data-ng-click="lctrl.findPassword()"><i class="zmdi zmdi-arrow-forward"></i></a>
+
+    <ul class="login-navigation">
+        <li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.forgot = 0; lctrl.login = 1">登陆</li>
+        <li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.forgot = 0; lctrl.register = 1">注册</li>
+    </ul>
+</div>
+
+<!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+    <h1 class="c-white">Warning!!</h1>
+    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+    <div class="iew-container">
+        <ul class="iew-download">
+            <li>
+                <a href="http://www.google.com/chrome/">
+                    <img src="img/browsers/chrome.png" alt="">
+                    <div>Chrome</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mozilla.org/en-US/firefox/new/">
+                    <img src="img/browsers/firefox.png" alt="">
+                    <div>Firefox</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.opera.com">
+                    <img src="img/browsers/opera.png" alt="">
+                    <div>Opera</div>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.apple.com/safari/">
+                    <img src="img/browsers/safari.png" alt="">
+                    <div>Safari</div>
+                </a>
+            </li>
+            <li>
+                <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                    <img src="img/browsers/ie.png" alt="">
+                    <div>IE (New)</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+
+
+<!-- build:js(src) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- run `gulp inject` to automatically populate bower script dependencies -->
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+<!-- inject:js -->
+<!-- js files will be automatically insert here -->
+<!-- endinject -->
+
+<!-- inject:partials -->
+<!-- angular templates will be automatically converted in js and inserted here -->
+<!-- endinject -->
+<!-- endbuild -->
+</body>
+</html>

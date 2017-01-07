@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h2>修改协议
+                        <small>可以在这里修改协议.</small>
+                    </h2>
+                </div>
+                <div class="col-sm-2 btn-demo">
+                    <button data-ui-sref="home.protocol({page: protocolUpdateCtrl.page, count: protocolUpdateCtrl.count})"
+                            class="btn btn-info btn-icon pull-right"><i class="zmdi zmdi-arrow-back"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-body card-padding">
+
+            <form role="form">
+                <div class="form-group fg-line">
+                    <label for="name">协议名称</label>
+                    <input type="text" class="form-control" id="name" data-ng-model="protocolUpdateCtrl.protocol.name" placeholder="协议名称">
+                </div>
+                <br/><br/>
+                <div class="form-group fg-line">
+                    <label for="name">协议内容</label>
+                    <textarea class="form-control" id="detail" data-auto-size data-ng-model="protocolUpdateCtrl.protocol.detail"
+                              placeholder="协议细则" rows="7"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-submit" data-ng-click="protocolUpdateCtrl.update()">修改</button>
+            </form>
+
+        </div>
+        <br/>
+    </div>
+</div>

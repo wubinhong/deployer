@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="mini-charts">
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="mini-charts-item bgm-cyan">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-bar="[6,4,8,6,5,6,7,8,3,5,9,5,8,4,3,6,8]"></div>
+                        <div class="count">
+                            <small>协议总数</small>
+                            <h2>{{protocolCtrl.stats.total | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="mini-charts-item bgm-lightgreen">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-line="[5,6,3,9,7,5,4,6,5,6,4,9]"></div>
+                        <div class="count">
+                            <small>生效协议</small>
+                            <h2>{{protocolCtrl.stats.enableNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="mini-charts-item bgm-bluegray">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-line="[9,4,6,5,6,4,5,7,9,3,6,5]"></div>
+                        <div class="count">
+                            <small>失效协议</small>
+                            <h2>{{protocolCtrl.stats.disableNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>协议管理<small>管理设备的协议解析细则.</small></h2>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 cat-toolbar">
+                    <button class="btn btn-default btn-icon-text" data-ng-click="protocolCtrl.checkAll()">
+                        <i class="zmdi" data-ng-class="{ 'zmdi-close': protocolCtrl.allChecked, 'zmdi-check-all': !protocolCtrl.allChecked }"></i>
+                        {{protocolCtrl.allChecked ? '取消全选' : '全选'}}
+                    </button>
+                    <button class="btn btn-danger btn-icon-text" data-ng-click="protocolCtrl.delBatch()"><i class="zmdi zmdi-delete"></i> 批量删除</button>
+                    <a class="btn btn-info btn-icon-text" data-ui-sref="home.protocol-add"><i class="zmdi zmdi-plus"></i> 新增</a>
+                </div>
+                <div class="chat-search col-sm-6 col-md-8">
+                    <div class="fg-line">
+                        <input type="text" class="form-control"
+                               placeholder="输入关键字后请按回车查询结果，支持按协议名称、协议内容模糊搜索"
+                               data-ng-model="protocolCtrl.keyword">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table ng-table="protocolCtrl.tableData" class="table table-striped table-vmiddle">
+                    <tr ng-repeat="row in $data">
+                        <td data-title="''">
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input type="checkbox" data-ng-model="row.checked">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </td>
+                        <td data-title="'NO.'" data-sortable="'id'">
+                            {{ row.id }}
+                        </td>
+                        <td data-title="'协议名称'" data-sortable="'name'" style="min-width: 100px;">
+                            {{ row.name }}
+                        </td>
+                        <td data-title="'协议内容 '" data-sortable="'detail'">
+                            {{ row.detail }}
+                        </td>
+                        <td data-title="'允许'" data-sortable="'enable'" class="cat-table-operation">
+                            <!--允许-->
+                            <div class="toggle-switch" data-ts-color="green">
+                                <input id="{{row.id}}" type="checkbox" hidden="hidden" data-ng-model="row.enable"
+                                       data-ng-click="protocolCtrl.enable(row)">
+                                <label for="{{row.id}}" class="ts-helper"></label>
+                            </div>
+                        </td>
+                        <td data-title="'修改'">
+                            <!--修改-->
+                            <button type="button" class="btn btn-default"
+                                    data-ui-sref="home.protocol-update({id: row.id, page: protocolCtrl.page, count: protocolCtrl.count})">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </td>
+                        <td data-title="'删除'">
+                            <!--删除-->
+                            <button type="button" class="btn btn-danger" data-ng-click="protocolCtrl.del(row)">
+                                <i class="zmdi zmdi-delete"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

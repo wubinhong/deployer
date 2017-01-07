@@ -1,0 +1,153 @@
+<div class="container" id="exception_module">
+    <div class="mini-charts">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="mini-charts-item bgm-cyan">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-bar="[6,4,8,6,5,6,7,8,3,5,9,5,8,4,3,6,8]"></div>
+                        <div class="count">
+                            <small>异常终端总数</small>
+                            <h2>{{exceptionCtrl.stats.exceptionDeviceNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="mini-charts-item bgm-red">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-line="[5,6,3,9,7,5,4,6,5,6,4,9]"></div>
+                        <div class="count">
+                            <small>报警</small>
+                            <h2>{{exceptionCtrl.stats.warningNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+                <div class="mini-charts-item bgm-orange">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-line="[9,4,6,5,6,4,5,7,9,3,6,5]"></div>
+                        <div class="count">
+                            <small>故障</small>
+                            <h2>{{exceptionCtrl.stats.failNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3">
+                <div class="mini-charts-item bgm-brown">
+                    <div class="clearfix">
+                        <div class="chart" data-sparkline-line="[5,6,3,9,7,5,4,6,5,6,4,9]"></div>
+                        <div class="count">
+                            <small>未知</small>
+                            <h2>{{exceptionCtrl.stats.unknownNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h2>异常管理<small>查看处理所有的异常信息.</small></h2>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 cat-toolbar">
+                        <button class="btn btn-default btn-icon-text" ng-if="homeCtrl.isAdmin" data-ng-click="exceptionCtrl.checkAll()">
+                            <i class="zmdi" data-ng-class="{ 'zmdi-close': exceptionCtrl.allChecked, 'zmdi-check-all': !exceptionCtrl.allChecked }"></i>
+                            {{exceptionCtrl.allChecked ? '取消全选' : '全选'}}
+                        </button>
+                        <button class="btn btn-danger btn-icon-text" ng-if="homeCtrl.isAdmin" data-ng-click="exceptionCtrl.delBatch()"><i class="zmdi zmdi-delete"></i> 批量删除</button>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <div class="date-picker input-group" ng-class="{ 'is-opened': opened == true }">
+                            <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                            <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+                                <input ng-click="open($event, 'opened')" type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       show-weeks="false" ng-model="dtPopup" is-open="opened" min-date="minDate" datepicker-options="dateOptions"
+                                       ng-required="true" current-text="今天" close-text="关闭" placeholder="查询开始时间" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <div class="date-picker input-group dp-blue" ng-class="{ 'is-opened': opened2 == true }">
+                            <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                            <div class="fg-line" ng-class="{ 'fg-toggled': opened2 == true }">
+                                <input ng-click="open($event, 'opened2')" type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                                       show-weeks="false" ng-model="dtPopup2" is-open="opened2" min-date="minDate" datepicker-options="dateOptions"
+                                       ng-required="true" current-text="今天" close-text="关闭" placeholder="查询结束时间" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-search col-sm-5 col-md-5">
+                        <div class="fg-line">
+                            <input type="text" class="form-control"
+                                   placeholder="支持按设备id、型号、地址、所属用户和协议名称模糊搜索"
+                                   data-ng-model="exceptionCtrl.keyword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table ng-table="exceptionCtrl.tableData" class="table table-striped table-vmiddle">
+                        <tr ng-repeat="row in $data">
+                            <td data-title="''">
+                                <div class="checkbox m-b-15">
+                                    <label>
+                                        <input type="checkbox" data-ng-model="row.checked">
+                                        <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            </td>
+                            <td data-title="'NO.'" data-sortable="'id'">
+                                {{ row.id }}
+                            </td>
+                            <td data-title="'设备id'" data-sortable="'eqId'">
+                                {{ row.eqId }}
+                            </td>
+                            <td data-title="'配置文件'" data-sortable="'model'">
+                                {{ row.model }}
+                            </td>
+                            <td data-title="'地址'" data-sortable="'path'">
+                                {{ row.path }}
+                            </td>
+                            <td data-title="'用户'" data-sortable="'user'">
+                                {{ row.user }}
+                            </td>
+                            <td data-title="'协议'" data-sortable="'protocol'">
+                                {{ row.protocol }}
+                            </td>
+                            <td data-title="'异常总数'">
+                                {{ row.exceptionNum }}
+                            </td>
+                            <td data-title="'报警'">
+                                {{ row.warningNum }}
+                            </td>
+                            <td data-title="'故障'">
+                                {{ row.failNum }}
+                            </td>
+                            <td data-title="'未知'">
+                                {{ row.unknownNum }}
+                            </td>
+                            <td data-title="'时间'" data-sortable="'lastAt'">
+                                {{ row.lastAt | date : 'yyyy-MM-dd HH:mm:ss' }}
+                            </td>
+                            <td data-title="'详情'">
+                                <!--查看详情-->
+                                <a class="btn btn-info btn-icon-text"
+                                   data-ui-sref="home.exception-detail({id: row.id, page: exceptionCtrl.page, count: exceptionCtrl.count})">
+                                    <i class="zmdi zmdi-search"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

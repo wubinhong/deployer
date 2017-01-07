@@ -1,0 +1,22 @@
+<aside id="sidebar" data-ng-class="{ 'toggled': vm.sidebarToggle.left === true }">
+    <div class="sidebar-inner c-overflow">
+        <div class="profile-menu">
+            <a href="" toggle-submenu>
+                <div class="profile-pic"><img src="assets/img/profile-pics/1.jpg" alt=""></div>
+                <div class="profile-info"> {{vm.user.name ? vm.user.name : vm.user.username}}<i class="zmdi zmdi-caret-down"></i></div>
+            </a>
+            <ul class="main-menu">
+                <li><a data-ui-sref="home.profile" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-account"></i>个人资料</a></li>
+                <!--用不上的功能暂时隐藏-->
+                <li class="hidden"><a href=""><i class="zmdi zmdi-input-antenna"></i> 安全设置</a></li>
+                <li class="hidden"><a href=""><i class="zmdi zmdi-settings"></i> 系统设置</a></li>
+                <li><a href="" data-ng-click="vm.logout()"><i class="zmdi zmdi-time-restore"></i> 登出</a></li>
+            </ul>
+        </div>
+        <ul class="main-menu" data-ng-repeat="menu in vm.menus">
+            <li ng-show="menu.show" data-ng-class="{'active': menu.active}">
+                <a data-ui-sref="{{menu.state}}" data-ng-click="vm.sidebarStat($event, menu)"><i class="zmdi" data-ng-class="menu.iconClass"></i>{{menu.caption}}</a>
+            </li>
+        </ul>
+    </div>
+</aside>

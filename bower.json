@@ -1,0 +1,43 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular-cookies": "~1.5.3",
+    "angular-sanitize": "~1.5.3",
+    "angular-messages": "~1.5.3",
+    "jquery": "~2.1.4",
+    "angular-ui-router": "~0.2.15",
+    "malarkey": "yuanqing/malarkey#~1.3.1",
+    "moment": "^2.15.1",
+    "animate.css": "~3.4.0",
+    "angular": "~1.5.3",
+    "material-design-iconic-font": "^2.2.0",
+    "bootstrap-sweetalert": "^1.0.1",
+    "angular-loading-bar": "^0.9.0",
+    "angular-animate": "^1.5.8",
+    "oclazyload": "^1.0.9",
+    "malihu-custom-scrollbar-plugin": "^3.1.5",
+    "Waves": "waves#^0.7.5",
+    "angular-nouislider": "^0.3.1",
+    "fullcalendar": "^3.0.1",
+    "flot": "flot#^0.8.3",
+    "flot.curvedlines": "^1.1.1",
+    "flot.tooltip": "^0.9.0",
+    "ng-table": "^1.0.0",
+    "bootstrap-growl": "remarkable-bootstrap-notify#2.0.1",
+    "sparkline": "^2.1.2",
+    "autosize": "^3.0.18",
+    "angular-farbtastic": "*",
+    "jquery-mask-plugin": "^1.14.0",
+    "angular-chosen-localytics": "^1.5.0",
+    "angular-bootstrap": "0.14.3",
+    "angular-locale_zh-cn": "git@github.com:Troland/angular-locale-zh-cn.git"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.5.3"
+  },
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": "~1.5.3"
+  }
+}

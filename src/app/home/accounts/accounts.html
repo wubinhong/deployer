@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="mini-charts">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="mini-charts-item bgm-indigo">
+                    <div class="clearfix">
+                        <div class="chart stats-bar" data-sparkline-bar="[6,4,8,6,5,6,7,8,3,5,9,5,8,4,3,6,8]"></div>
+                        <div class="count">
+                            <small>用户组总数</small>
+                            <h2>{{accountsCtrl.stats.totalGroupNum | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>用户组管理<small>对用户组进行管理.</small></h2>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 cat-toolbar">
+                    <button class="btn btn-default btn-icon-text" data-ng-click="accountsCtrl.checkAll()">
+                        <i class="zmdi" data-ng-class="{ 'zmdi-close': accountsCtrl.allChecked, 'zmdi-check-all': !accountsCtrl.allChecked }"></i>
+                        {{accountsCtrl.allChecked ? '取消全选' : '全选'}}
+                    </button>
+                    <button class="btn btn-danger btn-icon-text" data-ng-click="accountsCtrl.delBatch()"><i class="zmdi zmdi-delete"></i> 批量删除</button>
+                    <a class="btn btn-info btn-icon-text" data-ui-sref="home.accounts-add"><i class="zmdi zmdi-plus"></i> 新增</a>
+                </div>
+                <div class="chat-search col-sm-6 col-md-8">
+                    <div class="fg-line">
+                        <input type="text" class="form-control"
+                               placeholder="输入关键字后请按回车查询结果，支持按id、组名和备注模糊搜索"
+                               data-ng-model="accountsCtrl.keyword">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table ng-table="accountsCtrl.tableData" class="table table-striped table-vmiddle">
+                    <tr ng-repeat="row in $data">
+                        <td data-title="''">
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input type="checkbox" data-ng-model="row.checked">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </td>
+                        <td data-title="'NO.'" data-sortable="'id'">
+                            {{ row.id }}
+                        </td>
+                        <td data-title="'组名'" data-sortable="'name'">
+                            {{ row.name }}
+                        </td>
+                        <td data-title="'组备注'" data-sortable="'remark'">
+                            {{ row.remark }}
+                        </td>
+                        <td data-title="'绑定设备组'">
+                            {{row.deviceGroupNames.join(',')}}
+                        </td>
+                        <td data-title="'组管理员'">
+                            {{ row.groupAdminName }}
+                        </td>
+                        <td data-title="'组员数量'">
+                            {{ row.userNum }}
+                        </td>
+                        <td data-title="'绑定用户'">
+                            <!--修改-->
+                            <button type="button" class="btn btn-default"
+                                    data-ui-sref="home.accounts-bind({id: row.id, page: accountsCtrl.page, count: accountsCtrl.count})">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </td>
+                        <td data-title="'绑定设备组'">
+                            <!--修改-->
+                            <button type="button" class="btn btn-default"
+                                    data-ui-sref="home.accounts-bind-devices({accountGroupId: row.id, page: accountsCtrl.page, count: accountsCtrl.count})">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </td>
+                        <td data-title="'修改'">
+                            <!--修改-->
+                            <button type="button" class="btn btn-default"
+                                    data-ui-sref="home.accounts-update({id: row.id, page: accountsCtrl.page, count: accountsCtrl.count})">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </td>
+                        <td data-title="'删除'">
+                            <!--删除-->
+                            <button type="button" class="btn btn-danger" data-ng-click="accountsCtrl.del(row)">
+                                <i class="zmdi zmdi-delete"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,137 @@
+/* Do not remove the comments below. It's the markers used by wiredep to inject
+   sass dependencies when defined in the bower.json of your dependencies */
+// bower:scss
+// endbower
+
+// 自定义class
+.cat-toolbar {
+    padding: 5px 5px 5px 15px
+}
+
+// 绑定关系工具栏样式
+.card-header .row.cat-toolbar {
+    padding: 5px 16px;
+}
+
+// 搜索框
+.chat-search .form-control {
+    background: left center url("../assets/img/icons/search-2@2x.png") no-repeat;
+    background-size: 24px 24px;
+    padding-left: 30px;
+    -webkit-transition: all;
+    -o-transition: all;
+    transition: all;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+.chat-search .form-control:focus {
+    background-position: right center;
+    padding: 0 30px 0 0;
+}
+
+// ng-table配置，原模板的配置太丑了，去掉
+.sortable.sort-desc .ng-table-header:before {
+    visibility: hidden;
+}
+.sortable.sort-asc .ng-table-header:before {
+    visibility: hidden;
+}
+
+// ng-table各列的最小宽度
+.table-striped {
+    th {
+        text-align: left;
+        min-width: 70px;
+    }
+    td {
+        word-wrap: break-word;
+        min-width: 70px;
+    }
+    // ng-table里的复选框样式调整
+    td > .checkbox {
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+    th:first-child, td:first-child {
+        min-width: 70px;
+    }
+    th:nth-child(2), td:nth-child(2) {
+        min-width: 50px;
+    }
+    th.cat-table-operation, td.cat-table-operation {
+        max-width: 60px !important;
+    }
+    // horizontal scroll
+    thead {
+        overflow-x: scroll;
+//        display: table;
+//        width: 100%;
+//        table-layout: fixed;
+    }
+    tbody {
+        overflow-x:scroll;
+//        display: table;
+//        width: 100%;
+//        table-layout: fixed;
+    }
+}
+
+// pagination for ng-table active doesn't work
+.btn.waves-effect.active {
+    background: #F0F0F0;
+}
+
+// table text vertical align
+.table {
+    > thead, tbody > tr {
+        th, td {
+            vertical-align: middle;
+            max-width: 120px;
+            word-wrap: break-word;
+        }
+    }
+    .checkbox {
+        width: 15px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+// form submit
+.btn-submit {
+    margin: 30px 30px 10px 30px;
+}
+
+// float form input fix up
+.fg-float .form-control.ng-not-empty {
+    background: white;
+}
+
+// form padding
+.cat-form  {
+    padding: 0 20px;
+}
+
+// chosen component
+.chosen-container-single .chosen-single {
+    background: transparent;
+    box-shadow: none;
+}
+.chosen-container-single .chosen-single div b {
+    background: right 12px url(../assets/img/select.png) no-repeat !important;
+}
+.chosen-container-active.chosen-with-drop .chosen-single {
+    background: transparent;
+    border: none;
+}
+.chosen-container-active .chosen-single {
+    box-shadow: none;
+}
+.chosen-container-single .chosen-search input[type="text"] {
+//    background: white;    // 后面再解决
+}
+
+/* Do not remove the comments below. It's the markers used by gulp-inject to inject
+   all your sass files automatically */
+// injector
+// endinjector

@@ -1,0 +1,127 @@
+<div class="container">
+
+    <div class="block-header">
+        <div class="row">
+            <div class="col-sm-10">
+                <h2>绑定设备组
+                    <small>可以在这里修改用户组【{{accountsBindDevicesCtrl.accountGroup.name}}】与设备组的绑定关系.</small>
+                </h2>
+            </div>
+            <div class="col-sm-2 btn-demo">
+                <button data-ui-sref="home.accounts({page: accountsBindDevicesCtrl.page, count: accountsBindDevicesCtrl.count})"
+                        class="btn btn-info btn-icon pull-right"><i class="zmdi zmdi-arrow-back"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>未绑定设备组
+                        <small>该表格为未绑定的设备组.</small>
+                    </h2>
+                    <div class="row cat-toolbar">
+                        <div class="pull-right">
+                            <a class="btn btn-success btn-icon-text" uib-tooltip="绑定选定用户" tooltip-class="tooltip-green" data-ng-click="accountsBindDevicesCtrl.bindBatch()">
+                                绑定 <i class="zmdi zmdi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" data-ng-model="leftAllChecked" data-ng-click="accountsBindDevicesCtrl.leftCheckAll()">
+                                            <i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th>NO.</th>
+                                <th>名称</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="unbound in accountsBindDevicesCtrl.unbounds">
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" data-ng-model="unbound.checked">
+                                            <i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{unbound.id}}</td>
+                                <td>{{unbound.name}}</td>
+                                <td>{{unbound.remark}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>已绑定设备组
+                        <small>该表格为已绑定的设备组.</small>
+                    </h2>
+                    <div class="row cat-toolbar">
+                        <div>
+                            <a class="btn btn-warning btn-icon-text" uib-tooltip="解绑选定用户" tooltip-class="tooltip-orange" data-ng-click="accountsBindDevicesCtrl.unbindBatch()">
+                                <i class="zmdi zmdi-arrow-left"></i> 解绑
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" data-ng-model="rightAllChecked" data-ng-click="accountsBindDevicesCtrl.rightCheckAll()">
+                                            <i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </th>
+                                <th>NO.</th>
+                                <th>名称</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="bound in accountsBindDevicesCtrl.bounds">
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" data-ng-model="bound.checked">
+                                            <i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{bound.id}}</td>
+                                <td>{{bound.name}}</td>
+                                <td>{{bound.remark}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

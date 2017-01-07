@@ -1,0 +1,198 @@
+<div class="container">
+
+    <div class="block-header">
+        <h2>{{profileCtrl.user.name ? profileCtrl.user.name : profileCtrl.user.username}}
+            <small></small>
+        </h2>
+    </div>
+
+    <div class="card" id="profile-main">
+        <div class="pm-overview c-overflow">
+            <div class="pmo-pic">
+                <div class="p-relative">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/profile/default-avatar.png" alt="">
+                    </a>
+
+                    <div class="dropdown pmop-message" uib-dropdown>
+                        <button uib-dropdown-toggle class="btn bgm-white btn-float">
+                            <i class="zmdi zmdi-comment-text-alt"></i>
+                        </button>
+
+                        <div class="dropdown-menu stop-propagate">
+                            <textarea placeholder="Write something..."></textarea>
+
+                            <button class="btn bgm-green btn-float"><i class="zmdi zmdi-mail-send"></i></button>
+                        </div>
+                    </div>
+
+                    <a href="" class="pmop-edit">
+                        <i class="zmdi zmdi-camera"></i> <span class="hidden-xs">Update Profile Picture</span>
+                    </a>
+                </div>
+
+
+                <div class="pmo-stat">
+                    <h2 class="m-0 c-white">1562</h2>
+                    Total Connections
+                </div>
+            </div>
+
+            <div class="pmo-block pmo-contact hidden-xs">
+                <h2>联系方式</h2>
+
+                <ul>
+                    <li><i class="zmdi zmdi-phone"></i> {{ profileCtrl.user.phoneNum }}</li>
+                    <li><i class="zmdi zmdi-email"></i> {{ profileCtrl.user.email }}</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="pm-body clearfix">
+            <div class="pmb-block">
+                <div class="pmbb-header">
+                    <h2><i class="zmdi zmdi-person m-r-5"></i> 基本信息</h2>
+                    <ul class="actions" data-ng-if="profileCtrl.editInfo === 0">
+                        <li class="dropdown" uib-dropdown>
+                            <a href="" uib-dropdown-toggle>
+                                <i class="zmdi zmdi-more-vert"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a data-ng-click="profileCtrl.editInfo = 1" href="">编辑</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pmbb-body p-l-30">
+                    <div class="pmbb-view" data-ng-if="profileCtrl.editInfo === 0">
+                        <dl class="dl-horizontal">
+                            <dt>姓名</dt>
+                            <dd>{{ profileCtrl.user.name }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>用户名</dt>
+                            <dd>{{ profileCtrl.user.username }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>性别</dt>
+                            <dd>{{ profileCtrl.user.gender | enumGender }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>电话</dt>
+                            <dd>{{ profileCtrl.user.phoneNum }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>email</dt>
+                            <dd>{{ profileCtrl.user.email }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>身份证号</dt>
+                            <dd>{{ profileCtrl.user.idCard }}</dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt>备注</dt>
+                            <dd>{{ profileCtrl.user.remark }}</dd>
+                        </dl>
+                    </div>
+
+                    <form data-ng-submit="profileCtrl.submit()" class="pmbb-edit" data-ng-if="profileCtrl.editInfo === 1">
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">姓名</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <input data-ng-model="profileCtrl.user.name" type="text" class="form-control" value="{{ profileCtrl.user.name }}" placeholder="请输入姓名">
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">用户名</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <input data-ng-model="profileCtrl.user.username" type="text" class="form-control" value="{{ profileCtrl.user.username }}" placeholder="请输入登陆用户名">
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">性别</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <select chosen data-ng-model="profileCtrl.user.gender"
+                                            data-ng-options="gender.value as gender.display for gender in profileCtrl.genders"
+                                            data-placeholder-text-single="'选择性别'" class="w-100">
+                                    </select>
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">电话</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <input data-ng-model="profileCtrl.user.phoneNum" type="text" class="form-control" value="{{ profileCtrl.user.phoneNum }}" placeholder="请输入电话">
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">email</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <input data-ng-model="profileCtrl.user.email" type="text" class="form-control" value="{{ profileCtrl.user.email }}" placeholder="请输入email">
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">身份证号</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <input data-ng-model="profileCtrl.user.idCard" type="text" class="form-control" value="{{ profileCtrl.user.idCard }}" placeholder="请输入身份证号">
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">备注</dt>
+                            <dd>
+                                <div class="fg-line">
+                                    <input data-ng-model="profileCtrl.user.remark" type="text" class="form-control" value="{{ profileCtrl.user.remark }}" placeholder="请输入备注">
+                                </div>
+                            </dd>
+                        </dl>
+
+                        <div class="m-t-30">
+                            <button class="btn btn-primary btn-sm" type="submit">修改</button>
+                            <button class="btn btn-link btn-sm" data-ng-click="profileCtrl.cancel()" >取消</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <hr/>
+            <div class="pmb-block">
+                <a data-ng-click="profileCtrl.showModal()" style="margin: 0 20px;" class="btn btn-danger">密码修改</a>
+                <script type="text/ng-template" id="profile/resetModalContent.html">
+                    <div class="modal-header">
+                        <h4 class="modal-title">密码重置</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group fg-line">
+                            <label>原密码</label>
+                            <input type="password" class="form-control" data-ng-model="password.oldPassword"
+                                   placeholder="请输入原密码">
+                        </div>
+                        <div class="form-group fg-line">
+                            <label>新密码</label>
+                            <input type="password" class="form-control" data-ng-model="password.newPassword"
+                                   placeholder="请输入新密码">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-link" ng-click="reset()">重置</button>
+                        <button class="btn btn-link" ng-click="cancel()">取消</button>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

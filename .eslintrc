@@ -1,0 +1,30 @@
+{
+  "extends": "eslint:recommended",
+  "plugins": ["angular"],
+  "env": {
+    "browser": true,
+    "jasmine": true
+  },
+ "globals": {
+   "angular": true,
+   "module": true,
+   "inject": true,
+   "$": false,
+   "swal": false,
+   "Waves": false,
+   "autosize": false,
+   "wx": false
+ },
+ "rules": {
+   "angular/log": 0,
+   "no-console": 0,
+   "angular/no-services": [0, ["$http"]],
+   "angular/angularelement": 0,
+   "angular/document-service": 0,
+   "angular/window-service": 0,
+   "angular/controller-as": 0,
+   "angular/module-getter": 0,
+   "angular/controller-name": 0,
+   "angular/controller-as-route": 0
+ }
+}

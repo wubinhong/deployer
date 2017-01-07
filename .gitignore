@@ -1,0 +1,18 @@
+
+## For NodeJs and yoeman scraff
+node_modules/
+bower_components/
+coverage/
+.sass-cache/
+.idea/
+.tmp/
+dist/
+npm-debug.log
+*.log
+
+## env file
+src/app/index.env.js
+
+## For Python
+__pycache__
+
