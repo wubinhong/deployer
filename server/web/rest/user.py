@@ -18,6 +18,6 @@ def create_users():
     user_params = request.get_json()
     user_params["password"] = \
         md5(user_params["password"].encode("utf-8")).hexdigest().upper()
-    users.create(apikey=apikey, **user_params)
-    return jsonify(dict(rc=0))
+    # users.create(apikey=apikey, **user_params)
+    return jsonify(dict(code=0))
 

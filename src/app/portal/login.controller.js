@@ -18,7 +18,7 @@
         vm.loginModel = {};
         vm.doLogin = function() {
             $http.post('/backend/auth/login', vm.loginModel).then(function(response) {
-                if(response.data.status === 'success') {
+                if(response.data.code === 0) {
                     $cookies.putObject('user', response.data.data);
                     growlService.success('登陆成功！');
                     location.href = '/';

@@ -16,8 +16,6 @@ from web.utils.error import Error
 from .sessions import sessions
 
 logger = Logger("web.services.users")
-if sys.version_info > (3,):
-    string.letters = string.ascii_letters
 __author__ = 'Binhong Wu'
 
 
@@ -32,15 +30,14 @@ class UsersService(Base):
         session = sessions.first(user_id=user.id)
         expired = datetime.fromtimestamp(time.time() + 24 * 60 * 60).isoformat()
         if session is None:
-            sign = ''.join(random.choice(string.letters + string.digits) for _ in
-                           range(20))
+            token = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(20))
             sessions.create(user_id=user.id,
-                            session=sign,
+                            session=token,
                             expired=expired)
         else:
             sessions.update(session, expired=expired)
-            sign = session.session
-        return sign
+            token = session.session
+        return token
 
     def logout(self, user):
         session = sessions.first(user_id=user.id)
@@ -50,7 +47,7 @@ class UsersService(Base):
                 expired=datetime.now().isoformat())
 
     def is_login(self, session, apikey):
-        if users.first(apikey=apikey):
+        if users.first(apikey=apikey):  # 使用apikey可以免登陆调用接口
             return True
         session = sessions.first(session=session)
         if session is not None:

@@ -5,6 +5,7 @@ from flask import request, redirect, jsonify, url_for, g
 from web import app
 from web.services.users import users
 from web.services.sessions import sessions
+from web.utils.error import Error
 
 __author__ = 'Binhong Wu'
 
@@ -14,23 +15,21 @@ def authorize(func):
     def decorator(*args, **kargs):
         print('kevin: ', request.args)
         apikey = request.args.get("apikey")
-        sign = request.cookies.get('sign')
-        if users.is_login(sign, apikey):
+        token = request.headers.get('x-dandan-token')
+        if users.is_login(token, apikey):
             g.user = users.first(apikey=apikey) or \
-                users.get(sessions.first(session=sign).user_id)
+                users.get(sessions.first(session=token).user_id)
             if g.user is not None:
                 return func(*args, **kargs)
-        return redirect(url_for('login', next=request.path))
+        raise Error(13002)
     return decorator
 
 
 @app.route("/auth/login", methods=["POST"])
 def api_user_login():
     body = request.get_json()
-    username = body['username']
-    password = body['password']
-    sign = users.login(username, password)
-    return jsonify(dict(code=0, data=dict(sign=sign)))
+    token = users.login(body['username'], body['password'])
+    return jsonify(dict(code=0, data=dict(token=token)))
 
 @app.route("/auth/logout")
 @authorize

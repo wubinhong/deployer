@@ -9,6 +9,7 @@ from web.utils.error import Error
 @app.route("/api/hello", methods=["GET"])
 def api_hello():
     print('header: ', request.headers['User-Agent'])
+    print('header: ', request.headers.get('User-Agent'))
     print('kevin: ', request.args)
     print('kevin: ', request.args.get('name'))
     print('query_string: %s' % request.query_string)
