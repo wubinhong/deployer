@@ -9,7 +9,7 @@ from web.utils.log import Logger
 app = Flask(__name__)
 app.config.from_object("web.config")
 Logger.DEBUG_MODE = app.config["DEBUG"]
-app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+deployer://{0}:{1}@{2}:{3}/{4}'
+app.config['SQLALCHEMY_DATABASE_URI'] = ('mysql+pymysql://{0}:{1}@{2}:{3}/{4}'
                                          ).format(app.config["DB_USER"],
                                                   app.config["DB_PASS"],
                                                   app.config["DB_HOST"],
@@ -22,4 +22,4 @@ db_session = db.session
 
 
 # from .rest import api, webhooks, login, deploys, project, host, users
-from .rest import api
+from .rest import error, auth, api, user

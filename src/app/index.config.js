@@ -38,11 +38,11 @@
 
                 'response': function (response) {
                     // 拦截接口错误
-                    if (new RegExp("^/backend").test(response.config.url) && response.data.status != 'success') {
+                    if (new RegExp("^/backend").test(response.config.url) && response.data.code != 0) {
                         if(response.data.code === 1000) {   // 用户未登录
                             location.href = '/login.html';
                         } else {
-                            growlService.warning(response.data.message);
+                            growlService.warning(response.data.msg);
                         }
                     }
                     return response;

@@ -1,15 +1,23 @@
 __author__ = 'Binghong Wu'
 
-from flask import request, jsonify, g
+from flask import request, jsonify
 
 from web import app
 from web.utils.error import Error
 
-@app.errorhandler(Error)
-def error(err):
-    return jsonify(dict(rc=err.rc, msg=err.msg))
 
 @app.route("/api/hello", methods=["GET"])
 def api_hello():
-    # return jsonify(dict(rc=0, data=dict(id=deploy.id)))
-    return jsonify(dict(rc=0, data=dict(id=2, msg='good')))
+    print('header: ', request.headers['User-Agent'])
+    print('kevin: ', request.args)
+    print('kevin: ', request.args.get('name'))
+    print('query_string: %s' % request.query_string)
+    print('query_string:', request.query_string)
+    print('query_string:', request.args.get('name'))
+    if request.args.get('name'):
+        raise Error(10000, msg=None)
+    else:
+        return jsonify(dict(rc=0, data=dict(id=2, msg='good')))
+
+
+

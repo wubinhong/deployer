@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var env = require('./env');
 
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
@@ -34,7 +35,7 @@ function browserSyncInit(baseDir, browser) {
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.9.0/README.md
    */
   server.middleware = proxyMiddleware('/backend', {
-      target: 'http://localhost:9000', changeOrigin: true, logLevel: 'debug',
+      target: env.api.host, changeOrigin: true, logLevel: 'debug',
       pathRewrite: {
           '^/backend/': '/'
       }

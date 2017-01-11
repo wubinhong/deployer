@@ -17,7 +17,7 @@
         // event
         vm.loginModel = {};
         vm.doLogin = function() {
-            $http.post('/backend/admin/auth/login', vm.loginModel).then(function(response) {
+            $http.post('/backend/auth/login', vm.loginModel).then(function(response) {
                 if(response.data.status === 'success') {
                     $cookies.putObject('user', response.data.data);
                     growlService.success('登陆成功！');
@@ -38,7 +38,7 @@
             } else if(!vm.registerModel.agree) {
                 growlService.warning('必须同意注册条款才能注册！');
             } else {
-                $http.post('/backend/admin/auth/register', vm.registerModel).then(function(response) {
+                $http.post('/backend/users', vm.registerModel).then(function(response) {
                     if(response.data.status === 'success') {
                         growlService.success('注册成功！');
                         location.href = '/login.html';

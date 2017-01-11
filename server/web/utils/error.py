@@ -22,12 +22,12 @@ class Error(Exception):
         13001: "user not exists",
         }
 
-    def __init__(self, rc, msg=None):
-        self.rc = rc
+    def __init__(self, code, msg=None):
+        self.code = code
         if msg is None:
-            self.msg = self.MAPS[rc]
+            self.msg = self.MAPS[code]
         else:
             self.msg = msg
 
     def __repr__(self):
-        return "%s: %s" % (self.rc, self.msg)
+        return "%s: %s" % (self.code, self.msg)
