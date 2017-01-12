@@ -77,6 +77,9 @@ def create_users():
     apikey = ''.join(
         random.choice(string.ascii_letters+string.digits) for _ in range(32))
     user_params = request.get_json()
+    exist_user = users.find(name=user_params['name'])
+    if exist_user is not None:
+        raise Error(13001)
     user_params["password"] = \
         md5(user_params["password"].encode("utf-8")).hexdigest().upper()
     users.create(apikey=apikey, **user_params)

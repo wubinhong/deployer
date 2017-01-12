@@ -52,7 +52,7 @@
 //                    growlService.danger(rejection.statusText);
                     console.log(rejection);
                     if(angular.isObject(rejection.data)) {
-                        growlService.danger(rejection.data.message);
+                        growlService.danger(rejection.data.msg);
                     } else {
                         growlService.danger(rejection.data);
                     }
