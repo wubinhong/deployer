@@ -161,7 +161,7 @@
             console.log(row);
 
             $scope.reset = function () {
-                $http.patch('/backend/users/{0}/password'.format(row.id), $scope.newPassword).then(function(res) {
+                $http.patch('/backend/user/{0}/password'.format(row.id), $scope.newPassword).then(function(res) {
                     if(res.data.code === 0) {
                         growlService.success(res.data.msg);
                     }

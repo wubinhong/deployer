@@ -33,7 +33,10 @@ class Base(object):
         self.session.query(self.__model__).get_or_404(id)
 
     def count(self, criterion=None, **kargs):
-        return self.session.query(self.__model__).filter(criterion).filter_by(**kargs).count()
+        query = self.session.query(self.__model__)
+        if criterion is not None:
+            query = query.filter(criterion)
+        return query.filter_by(**kargs).count()
 
     def all(self, offset=None, limit=None, order_by=None, desc=False, criterion=None):
         query = self.session.query(self.__model__)

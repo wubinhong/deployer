@@ -48,7 +48,7 @@ def create_users():
     return jsonify(dict(code=0))
 
 
-@app.route('/users/<int:id>/password', methods=['PATCH'])
+@app.route('/user/<int:id>/password', methods=['PATCH'])
 @authorize
 def reset_password(id):
     password = request.data
@@ -65,5 +65,21 @@ def reset_password(id):
     users.update(user, password=password)
     # response
     return jsonify(dict(code=0, msg='密码更新成功！'))
+
+# 获取某个用户的信息
+@app.route("/user/<int:id>", methods=["GET"])
+@authorize
+def api_get_host_by_id(id):
+    return jsonify(dict(code=0, data=users.get(id)))
+
+
+# 更新某个信息的信息
+@app.route('/user/<int:id>', methods=['PUT'])
+@authorize
+def update_user_by_id(id):
+    user_params = request.get_json()
+    user_db = users.get(id)
+    users.update(user_db, **user_params)
+    return jsonify(dict(code=0, msg='用户信息更新成功！'))
 
 
