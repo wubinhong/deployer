@@ -2,48 +2,12 @@
     <div class="mini-charts">
         <div class="row">
             <div class="col-sm-6 col-md-3">
-                <div class="mini-charts-item bgm-cyan">
+                <div class="mini-charts-item bgm-indigo">
                     <div class="clearfix">
                         <div class="chart stats-bar" data-sparkline-bar="[6,4,8,6,5,6,7,8,3,5,9,5,8,4,3,6,8]"></div>
                         <div class="count">
                             <small>用户总数</small>
-                            <h2>{{accountCtrl.stats.totalUserNum | myNumber : 0}}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3">
-                <div class="mini-charts-item bgm-indigo">
-                    <div class="clearfix">
-                        <div class="chart stats-bar-2" data-sparkline-bar="[4,7,6,2,5,3,8,6,6,4,8,6,5,8,2,4,6]"></div>
-                        <div class="count">
-                            <small>系统管理员</small>
-                            <h2>{{accountCtrl.stats.adminUserNum | myNumber : 0}}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3">
-                <div class="mini-charts-item bgm-lightgreen">
-                    <div class="clearfix">
-                        <div class="chart stats-bar-2" data-sparkline-bar="[4,7,6,2,5,3,8,6,6,4,8,6,5,8,2,4,6]"></div>
-                        <div class="count">
-                            <small>普通用户</small>
-                            <h2>{{accountCtrl.stats.normalUserNum | myNumber : 0}}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3">
-                <div class="mini-charts-item bgm-deeporange">
-                    <div class="clearfix">
-                        <div class="chart" data-sparkline-line="[5,6,3,9,7,5,4,6,5,6,4,9]"></div>
-                        <div class="count">
-                            <small>禁用用户</small>
-                            <h2>{{accountCtrl.stats.disableUserNum | myNumber : 0}}</h2>
+                            <h2>{{accountCtrl.stats.total | myNumber : 0}}</h2>
                         </div>
                     </div>
                 </div>
@@ -65,7 +29,7 @@
                 <div class="chat-search col-sm-6 col-md-8">
                     <div class="fg-line">
                         <input type="text" class="form-control"
-                               placeholder="输入关键字后请按回车查询结果，支持按用户名、名字、邮箱、和手机号模糊搜索"
+                               placeholder="输入关键字后请按回车查询结果，支持按名字和手机号模糊搜索"
                                data-ng-model="accountCtrl.keyword">
                     </div>
                 </div>
@@ -87,37 +51,17 @@
                         <td data-title="'NO.'" data-sortable="'id'">
                             {{ row.id }}
                         </td>
-                        <td data-title="'用户名'" data-sortable="'username'">
-                            {{ row.username }}
-                        </td>
                         <td data-title="'名字'" data-sortable="'name'">
                             {{ row.name }}
                         </td>
-                        <td data-title="'性别'" data-sortable="'gender'">
-                            {{ row.gender == 'MALE' ? '男' : '女' }}
+                        <td data-title="'角色'" data-sortable="'role'" style="min-width: 90px;">
+                            {{ row.role == 'ADMIN' ? '系统管理员' : '普通用户' }}
                         </td>
-                        <td data-title="'用户类型'" data-sortable="'userType'" style="min-width: 90px;">
-                            {{ row.userType == 'ADMIN' ? '系统管理员' : '普通用户' }}
-                        </td>
-                        <td data-title="'电话号码'" data-sortable="'phoneNum'">
-                            {{ row.phoneNum }}
-                        </td>
-                        <td data-title="'身份证'" data-sortable="'idCard'">
-                            {{ row.idCard }}
+                        <td data-title="'电话号码'" data-sortable="'phone'">
+                            {{ row.phone }}
                         </td>
                         <td data-title="'邮箱'" data-sortable="'email'">
                             {{ row.email }}
-                        </td>
-                        <td data-title="'备注'" data-sortable="'remark'">
-                            {{ row.remark }}
-                        </td>
-                        <td data-title="'允许'" ng-if="homeCtrl.isAdmin" data-sortable="'enable'">
-                            <!--允许-->
-                            <div class="toggle-switch" data-ts-color="green">
-                                <input id="{{row.id}}" type="checkbox" hidden="hidden" data-ng-model="row.enable"
-                                       data-ng-click="accountCtrl.enable(row)">
-                                <label for="{{row.id}}" class="ts-helper"></label>
-                            </div>
                         </td>
                         <td data-title="'密码重置'" ng-if="homeCtrl.isAdmin">
                             <!--密码重置-->

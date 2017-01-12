@@ -32,11 +32,12 @@ class Base(object):
     def get_or_404(self, id):
         self.session.query(self.__model__).get_or_404(id)
 
-    def count(self, **kargs):
-        return self.session.query(self.__model__).filter_by(**kargs).count()
+    def count(self, criterion=None, **kargs):
+        return self.session.query(self.__model__).filter(criterion).filter_by(**kargs).count()
 
-    def all(self, offset=None, limit=None, order_by=None, desc=False):
+    def all(self, offset=None, limit=None, order_by=None, desc=False, criterion=None):
         query = self.session.query(self.__model__)
+        query = query.filter(criterion)
         if order_by is not None:
             if desc:
                 query = query.order_by(db.desc(order_by))

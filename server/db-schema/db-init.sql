@@ -19,7 +19,7 @@ CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `role` int(10) unsigned DEFAULT NULL,
+  `role` enum('ADMIN','NORMAL') DEFAULT NULL COMMENT '角色',
   `email` varchar(64) DEFAULT '',
   `phone` varchar(16) DEFAULT '',
   `apikey` varchar(64) NOT NULL,

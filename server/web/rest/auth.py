@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import request, redirect, jsonify, url_for, g
+from flask import request, jsonify, g
 
 from web import app
 from web.services.users import users
@@ -13,7 +13,6 @@ __author__ = 'Binhong Wu'
 def authorize(func):
     @wraps(func)
     def decorator(*args, **kargs):
-        print('kevin: ', request.args)
         apikey = request.args.get("apikey")
         token = request.headers.get('x-dandan-token')
         if users.is_login(token, apikey):
@@ -28,14 +27,13 @@ def authorize(func):
 @app.route("/auth/login", methods=["POST"])
 def api_user_login():
     body = request.get_json()
-    token = users.login(body['username'], body['password'])
-    return jsonify(dict(code=0, data=dict(token=token)))
+    login_info = users.login(body['username'], body['password'])
+    return jsonify(dict(code=0, data=login_info))
+
 
 @app.route("/auth/logout")
 @authorize
 def logout():
     users.logout(g.user)
-    resp = redirect(url_for('login'))
-    resp.set_cookie("sign", "", expires=0)
-    return resp
+    return jsonify(dict(code=0, msg='logout successfully'))
 

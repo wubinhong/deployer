@@ -37,7 +37,7 @@ class UsersService(Base):
         else:
             sessions.update(session, expired=expired)
             token = session.session
-        return token
+        return dict(token=token, id=user.id, name=user.name, role=user.role)
 
     def logout(self, user):
         session = sessions.first(user_id=user.id)

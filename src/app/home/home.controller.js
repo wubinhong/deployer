@@ -113,8 +113,7 @@
 
             // user info
             vm.user = $cookies.getObject('user');
-            var isAdmin = vm.user.userType === 'ADMIN';
-            var isGroupAdmin = vm.user.isGroupAdmin;
+            var isAdmin = vm.user.role === 'ADMIN';
             // 初始化菜单
             vm.leftMenus = [{
                 caption: '概况', iconClass: 'zmdi-home', state: 'home.dashboard', show: true, active: true
@@ -123,7 +122,7 @@
             }, {
                 caption: '设备组管理', iconClass: 'zmdi-device-hub', state: 'home.devices', show: isAdmin
             }, {
-                caption: '用户管理', iconClass: 'zmdi-account', state: 'home.account', show: isAdmin || isGroupAdmin
+                caption: '用户管理', iconClass: 'zmdi-account', state: 'home.account', show: isAdmin
             }, {
                 caption: '用户组管理', iconClass: 'zmdi-accounts', state: 'home.accounts', show: isAdmin
             }, {
@@ -134,7 +133,6 @@
 
             // supply cookie user info
             vm.isAdmin = isAdmin;
-            vm.isGroupAdmin = isGroupAdmin;
         })
         // =========================================================================
         // Header

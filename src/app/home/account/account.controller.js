@@ -26,9 +26,9 @@
             menuService.activeMenu('home.account');
             var vm = this;
             // stats
-            $http.get('/backend/admin/user/stats').then(function(response) {
-                if(response.data.status === 'success') {
-                    vm.stats = response.data.data;
+            $http.get('/backend/user/stats').success(function(data) {
+                if(data.code === 0) {
+                    vm.stats = data.data;
                 }
             });
             //Sorting
@@ -46,7 +46,7 @@
                     // use build-in angular filter
                     vm.page = params.page();
                     vm.count = params.count();
-                    return $http.get('/backend/admin/users', {
+                    return $http.get('/backend/users', {
                         params: {
                             keyword: vm.keyword, page: vm.page - 1, size: vm.count, sorting: params.orderBy()
                         }
@@ -161,9 +161,9 @@
             console.log(row);
 
             $scope.reset = function () {
-                $http.patch('/backend/admin/user/{0}/reset'.format(row.id), $scope.newPassword).then(function(res) {
-                    if(res.data.status === 'success') {
-                        growlService.success(res.data.message);
+                $http.patch('/backend/users/{0}/password'.format(row.id), $scope.newPassword).then(function(res) {
+                    if(res.data.code === 0) {
+                        growlService.success(res.data.msg);
                     }
                     $uibModalInstance.close();
                 });
