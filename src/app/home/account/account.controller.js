@@ -97,8 +97,8 @@
                     confirmButtonText: "删除",
                     closeOnConfirm: false
                 }, function(){
-                    $http.delete('/backend/admin/user/' + ids.join(',')).then(function(response) {
-                        if(response.data.status === 'success') {
+                    $http.delete('/backend/user/' + ids.join(',')).success(function(data) {
+                        if(data.code === 0) {
                             swal("批量删除成功!", "勾选的账号已经全部被删除", "success");
                             vm.tableData.reload();
                             vm.allChecked = false;
@@ -119,21 +119,12 @@
                     confirmButtonText: "删除",
                     closeOnConfirm: true
                 }, function(){
-                    $http.delete('/backend/admin/user/' + row.id).then(function(response) {
-                        if(response.data.status === 'success') {
+                    $http.delete('/backend/user/' + row.id).success(function(data) {
+                        if(data.code === 0) {
                             growlService.success('删除成功');
                             vm.tableData.reload();
                         }
                     });
-                });
-            };
-
-            vm.enable = function(row) {
-                $http.patch('/backend/admin/user/{0}/enable?enable={1}'.format(row.id, row.enable)).then(function(response) {
-                    if(response.data.status === 'success') {
-                        growlService.success(row.enable ? '启用成功' : '禁用成功');
-                        vm.tableData.reload();
-                    }
                 });
             };
 

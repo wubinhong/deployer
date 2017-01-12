@@ -24,21 +24,11 @@
             var vm = this;
 
             // init
-            vm.account = {gender: 'MALE', userType: 'NORMAL', enable: false};
-            vm.genders = [{
-                display: '男', value: 'MALE'
-            }, {
-                display: '女', value: 'FEMALE'
-            }];
-            vm.userTypes = [{
+            vm.account = {role: 'NORMAL'};
+            vm.roles = [{
                 display: '普通用户', value: 'NORMAL'
             }, {
                 display: '系统管理员', value: 'ADMIN'
-            }];
-            vm.enables = [{
-                display: '启用', value: true
-            }, {
-                display: '禁止', value: false
             }];
 
             // events
@@ -47,11 +37,11 @@
                     growlService.warning('请填写信息');
                     return;
                 }
-                if(vm.account.phoneNum) {
-                    vm.account.phoneNum = vm.account.phoneNum.replace(/-/g, '');
+                if(vm.account.phone) {
+                    vm.account.phone = vm.account.phone.replace(/-/g, '');
                 }
-                $http.post('/backend/admin/users', vm.account).then(function(response) {
-                    if(response.data.status === 'success') {
+                $http.post('/backend/users', vm.account).success(function(data) {
+                    if(data.code === 0) {
                         growlService.success('添加成功！');
                     }
                 });

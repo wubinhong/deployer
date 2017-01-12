@@ -36,18 +36,6 @@ def get_users():
     return jsonify(dict(code=0, data=dict(total=total, content=user_list)))
 
 
-@app.route("/users", methods=["POST"])
-@authorize
-def create_users():
-    apikey = ''.join(
-        random.choice(string.ascii_letters+string.digits) for _ in range(32))
-    user_params = request.get_json()
-    user_params["password"] = \
-        md5(user_params["password"].encode("utf-8")).hexdigest().upper()
-    users.create(apikey=apikey, **user_params)
-    return jsonify(dict(code=0))
-
-
 @app.route('/user/<int:id>/password', methods=['PATCH'])
 @authorize
 def reset_password(id):
@@ -83,3 +71,21 @@ def update_user_by_id(id):
     return jsonify(dict(code=0, msg='用户信息更新成功！'))
 
 
+@app.route("/users", methods=["POST"])
+@authorize
+def create_users():
+    apikey = ''.join(
+        random.choice(string.ascii_letters+string.digits) for _ in range(32))
+    user_params = request.get_json()
+    user_params["password"] = \
+        md5(user_params["password"].encode("utf-8")).hexdigest().upper()
+    users.create(apikey=apikey, **user_params)
+    return jsonify(dict(code=0))
+
+
+@app.route("/user/<ids>", methods=["DELETE"])
+@authorize
+def delete_by_id(ids):
+    for id in ids.split(','):
+        users.delete(id)
+    return jsonify(dict(code=0, msg='删除成功！'))

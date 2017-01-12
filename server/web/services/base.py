@@ -64,6 +64,9 @@ class Base(object):
     def session_commit(self):
         self.session.commit()
 
-    def __del__(self):
-        logger.info("session close.")
-        self.session.close()
+    def delete(self, id):
+        # logger.info("session close.")
+        # self.session.close()
+        r = self.get(id)
+        self.session.delete(r)
+        self.session_commit()
