@@ -16,9 +16,16 @@
              * @param state 菜单路由state
              */
             this.activeMenu = function(state) {
-                var homeCtrl = angular.element('sidebar-left').controller();
-                homeCtrl.leftMenus.forEach(function(menu) {
-                    menu.active = menu.state === state;
+                var mainCtrl = angular.element('sidebar-left').controller();
+                mainCtrl.leftMenus.forEach(function(menu) {
+                    menu.active = false;
+                    menu.subMenus.forEach(function(subMenu) {
+                        subMenu.active = false;
+                        if(subMenu.state == state) {
+                            menu.active = true;
+                            subMenu.active = true;
+                        }
+                    });
                 });
             }
         })

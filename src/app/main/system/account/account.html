@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="mini-charts">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="mini-charts-item bgm-indigo">
+                    <div class="clearfix">
+                        <div class="chart stats-bar" data-sparkline-bar="[6,4,8,6,5,6,7,8,3,5,9,5,8,4,3,6,8]"></div>
+                        <div class="count">
+                            <small>用户总数</small>
+                            <h2>{{accountCtrl.stats.total | myNumber : 0}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>用户管理<small>对系统管理员进行管理.</small></h2>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 cat-toolbar">
+                    <button class="btn btn-default btn-icon-text" ng-if="mainCtrl.isAdmin" data-ng-click="accountCtrl.checkAll()">
+                        <i class="zmdi" data-ng-class="{ 'zmdi-close': accountCtrl.allChecked, 'zmdi-check-all': !accountCtrl.allChecked }"></i>
+                        {{accountCtrl.allChecked ? '取消全选' : '全选'}}
+                    </button>
+                    <button class="btn btn-danger btn-icon-text" ng-if="mainCtrl.isAdmin" data-ng-click="accountCtrl.delBatch()"><i class="zmdi zmdi-delete"></i> 批量删除</button>
+                    <a class="btn btn-info btn-icon-text" ng-if="mainCtrl.isAdmin" data-ui-sref="main.account-add"><i class="zmdi zmdi-plus"></i> 新增</a>
+                </div>
+                <div class="chat-search col-sm-6 col-md-8">
+                    <div class="fg-line">
+                        <input type="text" class="form-control"
+                               placeholder="输入关键字后请按回车查询结果，支持按名字和手机号模糊搜索"
+                               data-ng-model="accountCtrl.keyword">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table ng-table="accountCtrl.tableData" class="table table-striped table-vmiddle">
+                    <tr ng-repeat="row in $data">
+                        <td data-title="''">
+                            <div class="checkbox m-b-15">
+                                <label>
+                                    <input type="checkbox" data-ng-model="row.checked">
+                                    <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </td>
+                        <td data-title="'NO.'" data-sortable="'id'">
+                            {{ row.id }}
+                        </td>
+                        <td data-title="'名字'" data-sortable="'name'">
+                            {{ row.name }}
+                        </td>
+                        <td data-title="'角色'" data-sortable="'role'" style="min-width: 90px;">
+                            {{ row.role == 'ADMIN' ? '系统管理员' : '普通用户' }}
+                        </td>
+                        <td data-title="'电话号码'" data-sortable="'phone'">
+                            {{ row.phone }}
+                        </td>
+                        <td data-title="'邮箱'" data-sortable="'email'">
+                            {{ row.email }}
+                        </td>
+                        <td data-title="'密码重置'" ng-if="mainCtrl.isAdmin">
+                            <!--密码重置-->
+                            <button type="button" class="btn bgm-teal" data-ng-click="accountCtrl.resetModal(row)">
+                                <i class="zmdi zmdi-shield-security"></i>
+                            </button>
+                        </td>
+                        <td data-title="'修改'" ng-if="mainCtrl.isAdmin">
+                            <!--修改-->
+                            <button type="button" class="btn btn-default"
+                                    data-ui-sref="main.account-update({id: row.id, page: accountCtrl.page, count: accountCtrl.count})">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </td>
+                        <td data-title="'删除'" ng-if="mainCtrl.isAdmin">
+                            <!--删除-->
+                            <button type="button" class="btn btn-danger" data-ng-click="accountCtrl.del(row)">
+                                <i class="zmdi zmdi-delete"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="resetModalContent.html">
+        <div class="modal-header">
+            <h4 class="modal-title">密码重置</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group fg-line">
+                <label>新密码</label>
+                <input type="password" class="form-control" data-ng-model="newPassword"
+                       placeholder="请输入新密码">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link" ng-click="reset()">重置</button>
+            <button class="btn btn-link" ng-click="cancel()">取消</button>
+        </div>
+    </script>
+
+</div>

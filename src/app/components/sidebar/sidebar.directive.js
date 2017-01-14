@@ -19,16 +19,11 @@
                 var vm = this;
 
                 // 事件
-                vm.sidebarStat = function (event, menu) {
+                vm.sidebarStat = function (event) {
                     // 如果点击了其他菜单，则隐藏菜单栏
                     if (!angular.element(event.target).parent().hasClass('active')) {
                         vm.sidebarToggle.left = false;
                     }
-                    // active setting
-                    vm.menus.forEach(function(item) {
-                        delete item['active'];
-                    });
-                    menu.active = true;
                 };
                 vm.logout = function() {
                     $http.put('/backend/admin/auth/logout').then(function(response) {
