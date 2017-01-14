@@ -34,7 +34,15 @@
             // events
             vm.add = function() {
                 if(!vm.account) {
-                    growlService.warning('请填写信息');
+                    growlService.warning('请填写信息！');
+                    return;
+                }
+                if(!vm.account.name) {
+                    growlService.warning('账号名称必填！');
+                    return;
+                }
+                if(!vm.account.password) {
+                    growlService.warning('密码必填！');
                     return;
                 }
                 if(vm.account.phone) {

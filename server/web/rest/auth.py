@@ -20,7 +20,7 @@ def authorize(func):
                 users.get(sessions.first(session=token).user_id)
             if g.user is not None:
                 return func(*args, **kargs)
-        raise Error(13002)
+        raise Error(14000)
     return decorator
 
 

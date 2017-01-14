@@ -20,7 +20,9 @@ class Error(Exception):
         # 用户部分
         13000: "username or password incorrect",
         13001: "user not exists",
-        13002: "user not login",
+        13002: "user exists",
+        # 权限校验
+        14000: "user not login",
         }
 
     def __init__(self, code, msg=None):
