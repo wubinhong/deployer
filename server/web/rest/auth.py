@@ -31,7 +31,7 @@ def api_user_login():
     return jsonify(dict(code=0, data=login_info))
 
 
-@app.route("/auth/logout")
+@app.route("/auth/logout", methods=['PUT'])
 @authorize
 def logout():
     users.logout(g.user)

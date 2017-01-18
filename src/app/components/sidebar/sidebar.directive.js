@@ -26,8 +26,8 @@
                     }
                 };
                 vm.logout = function() {
-                    $http.put('/backend/admin/auth/logout').then(function(response) {
-                        if(response.data.status === 'success') {
+                    $http.put('/backend/auth/logout').then(function(response) {
+                        if(response.data.code === 0) {
                             $cookies.remove('user');
                             location.href = '/login.html';
                         }

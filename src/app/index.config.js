@@ -17,7 +17,7 @@
                 return new RegExp('^.*\\.(js|css|scss|gif|jpg|jpeg|tiff|png|woff|woff2)$').test(url);
             }
             function freeUrl(url) {
-                return new RegExp('^.*(login.html)$').test(url) || new RegExp('^/backend/admin/auth/.*$').test(url);
+                return new RegExp('^.*(login.html)$').test(url) || new RegExp('^/backend/auth/.*$').test(url);
             }
 
             return {

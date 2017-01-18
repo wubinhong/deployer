@@ -50,7 +50,7 @@
             var vm = this;
 
             //Welcome Message
-            growlService.growl('欢迎使用吉林消防终端后台管理系统！', 'inverse');
+            growlService.growl('欢迎使用蛋蛋项目发布系统！', 'inverse');
 
             // Detact Mobile Browser
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
