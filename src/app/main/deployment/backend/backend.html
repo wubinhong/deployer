@@ -35,7 +35,7 @@
                         <label>服务层</label>
                         <div class="row checkbox-padding">
                             <label class="checkbox checkbox-inline">
-                                <input type="checkbox" value="all" data-ng-click="backendCtrl.checkAllServices()">
+                                <input type="checkbox" value="all" data-ng-click="backendCtrl.checkAllServices($event)">
                                 <i class="input-helper"></i>
                                 全选
                             </label>
@@ -55,7 +55,7 @@
                         <label>接入层</label>
                         <div class="row checkbox-padding">
                             <label class="checkbox checkbox-inline">
-                                <input type="checkbox" value="all" data-ng-click="backendCtrl.checkAllApps()">
+                                <input type="checkbox" value="all" data-ng-click="backendCtrl.checkAllApps($event)">
                                 <i class="input-helper"></i>
                                 全选
                             </label>

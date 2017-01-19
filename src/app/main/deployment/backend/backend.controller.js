@@ -79,12 +79,22 @@
 
 
             // events
-            vm.checkAllServices = function() {
-                $('input[name="service"]').click();
+            vm.checkAllServices = function($event) {
+                var checked = $event.target.checked;
+                if(checked) {
+                    $('input[name="service"]:not(:checked)').click();
+                } else {
+                    $('input[name="service"]:checked').click();
+                }
             };
 
-            vm.checkAllApps = function() {
-                $('input[name="app"]').click();
+            vm.checkAllApps = function($event) {
+                var checked = $event.target.checked;
+                if(checked) {
+                    $('input[name="app"]:not(:checked)').click();
+                } else {
+                    $('input[name="app"]:checked').click();
+                }
             };
 
 
