@@ -1,5 +1,98 @@
-<div class="container">
+<div class="container" id="backend_module">
+    <div class="card">
+        <div class="card-header">
+            <h2>后台SOA接口服务发布<small>请顺序定义要发布的环境、分支、commit、服务层服务以及接入层apps服务.</small></h2>
+        </div>
 
-    <h1>backend module!</h1>
+        <div class="card-body card-padding">
+            <form role="form">
+                <div class="row cat-form">
+                    <div class="form-group fg-line">
+                        <label>repo host</label>
+                        <select chosen data-ng-model="backendCtrl.deploy.host"
+                                data-ng-options="host.value as host.display for host in backendCtrl.hosts"
+                                data-placeholder-text-single="'选择要发布的主机环境'" class="w-100">
+                        </select>
+                    </div>
+
+                    <div class="form-group fg-line">
+                        <label>repo branch</label>
+                        <select chosen data-ng-model="backendCtrl.deploy.branch"
+                                data-ng-options="branch.value as branch.display for branch in backendCtrl.branches"
+                                data-placeholder-text-single="'选择部署分支'" class="w-100">
+                        </select>
+                    </div>
+
+                    <div class="form-group fg-line">
+                        <label>repo commit</label>
+                        <select chosen data-ng-model="backendCtrl.deploy.commit"
+                                data-ng-options="commit.value as commit.display for commit in backendCtrl.commits"
+                                data-placeholder-text-single="'选择分支上的commit'" class="w-100">
+                        </select>
+                    </div>
+
+                    <div class="form-group fg-line">
+                        <label>服务层</label>
+                        <div class="row checkbox-padding">
+                            <label class="checkbox checkbox-inline">
+                                <input type="checkbox" value="all" data-ng-click="backendCtrl.checkAllServices()">
+                                <i class="input-helper"></i>
+                                全选
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 checkbox-padding" data-ng-repeat="service in backendCtrl.services">
+                                <label class="checkbox checkbox-inline">
+                                    <input type="checkbox" name="service" value="{{service.name}}">
+                                    <i class="input-helper"></i>
+                                    {{service.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group fg-line">
+                        <label>接入层</label>
+                        <div class="row checkbox-padding">
+                            <label class="checkbox checkbox-inline">
+                                <input type="checkbox" value="all" data-ng-click="backendCtrl.checkAllApps()">
+                                <i class="input-helper"></i>
+                                全选
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 checkbox-padding" data-ng-repeat="app in backendCtrl.apps">
+                                <label class="checkbox checkbox-inline">
+                                    <input type="checkbox" name="app" value="{{app.name}}">
+                                    <i class="input-helper"></i>
+                                    {{app.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block waves-effect" data-ng-click="backendCtrl.release()">发布</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="resetModalContent.html">
+        <div class="modal-header">
+            <h4 class="modal-title">密码重置</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group fg-line">
+                <label>新密码</label>
+                <input type="password" class="form-control" data-ng-model="newPassword"
+                       placeholder="请输入新密码">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link" ng-click="reset()">重置</button>
+            <button class="btn btn-link" ng-click="cancel()">取消</button>
+        </div>
+    </script>
 
 </div>
