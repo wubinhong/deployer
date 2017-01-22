@@ -135,6 +135,20 @@ body .breadcrumb.cat-breadcrumb {
 //    background: white;    // 后面再解决
 }
 
+// for multiple chosen component
+.chosen-container-multi .chosen-choices {
+    background-image: none;
+}
+.chosen-container-active .chosen-choices {
+    box-shadow: none;
+}
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+    background-position: -200px 1px;
+    &:hover {
+        background-position: -200px 1px;
+    }
+}
+
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject
    all your sass files automatically */
 // injector

@@ -11,6 +11,11 @@ __author__ = 'Binhong Wu'
 
 
 def authorize(func):
+    """
+    rest授权注解
+    :param func:
+    :return:
+    """
     @wraps(func)
     def decorator(*args, **kargs):
         apikey = request.args.get("apikey")
@@ -21,6 +26,21 @@ def authorize(func):
             if g.user is not None:
                 return func(*args, **kargs)
         raise Error(14000)
+    return decorator
+
+
+def session_info(func):
+    """
+    获取登陆相关的信息
+    :param func:
+    :return:
+    """
+    @wraps(func)
+    def decorator(*args, **kwargs):
+        apikey = request.args.get("apikey")
+        token = request.headers.get('x-dandan-token')
+        kwargs.setdefault('user', users.get_user_info(token, apikey))
+        return func(*args, **kwargs)
     return decorator
 
 

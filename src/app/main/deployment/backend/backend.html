@@ -6,31 +6,52 @@
 
         <div class="card-body card-padding">
             <form role="form">
+
                 <div class="row cat-form">
-                    <div class="form-group fg-line">
-                        <label>repo host</label>
-                        <select chosen data-ng-model="backendCtrl.deploy.host"
-                                data-ng-options="host.value as host.display for host in backendCtrl.hosts"
-                                data-placeholder-text-single="'选择要发布的主机环境'" class="w-100">
-                        </select>
+
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group fg-line">
+                            <label>repo profile</label>
+                            <select chosen data-ng-model="backendCtrl.deploy.profile"
+                                    data-ng-options="profile.value as profile.display for profile in backendCtrl.profiles"
+                                    data-placeholder-text-single="'选择要发布的环境'" class="w-100">
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group fg-line">
-                        <label>repo branch</label>
-                        <select chosen data-ng-model="backendCtrl.deploy.branch"
-                                data-ng-options="branch.value as branch.display for branch in backendCtrl.branches"
-                                data-placeholder-text-single="'选择部署分支'" class="w-100">
-                        </select>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group fg-line">
+                            <label>repo hosts</label>
+                            <select chosen multiple data-ng-model="backendCtrl.deploy.host"
+                                    data-placeholder="选择要发布的目标主机" class="w-100">
+                                <option value="{{host.value}}" data-ng-repeat="host in backendCtrl.hosts">{{host.display}}</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group fg-line">
-                        <label>repo commit</label>
-                        <select chosen data-ng-model="backendCtrl.deploy.commit"
-                                data-ng-options="commit.value as commit.display for commit in backendCtrl.commits"
-                                data-placeholder-text-single="'选择分支上的commit'" class="w-100">
-                        </select>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group fg-line">
+                            <label>repo branch</label>
+                            <select chosen data-ng-model="backendCtrl.deploy.branch"
+                                    data-ng-options="branch.value as branch.display for branch in backendCtrl.branches"
+                                    data-placeholder-text-single="'选择部署分支'" class="w-100">
+                            </select>
+                        </div>
                     </div>
 
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group fg-line">
+                            <label>repo commit</label>
+                            <select chosen data-ng-model="backendCtrl.deploy.commit"
+                                    data-ng-options="commit.value as commit.display for commit in backendCtrl.commits"
+                                    data-placeholder-text-single="'选择分支上的commit'" class="w-100">
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row cat-form">
                     <div class="form-group fg-line">
                         <label>服务层</label>
                         <div class="row checkbox-padding">
@@ -70,7 +91,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block waves-effect" data-ng-click="backendCtrl.release()">发布</button>

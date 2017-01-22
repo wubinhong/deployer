@@ -21,18 +21,25 @@
         // =========================================================================
         // controller
         // =========================================================================
-        .controller('BackendController', function(menuService) {
+        .controller('BackendController', function(menuService, $http) {
             // menu active
             menuService.activeMenu('main.backend');
             var vm = this;
             // init
-            vm.deploy = {host: 'dev.dandanlicai.com', branch: 'master', commit: 'abcd'};
+            vm.deploy = {profile: 'dev', host: 'dev.dandanlicai.com', branch: 'master', commit: 'abcd'};
+            vm.profiles = [{
+                display: 'dev环境', value: 'dev'
+            }, {
+                display: 'test环境', value: 'test'
+            }, {
+                display: 'prod环境', value: 'prod'
+            }];
             vm.hosts = [{
-                display: 'dev环境', value: 'dev.dandanlicai.com'
+                display: 'dev.dandanlicai.com', value: 'dev.dandanlicai.com'
             }, {
-                display: 'test环境', value: 'test.dandanlicai.com'
+                display: 'test.dandanlicai.com', value: 'test.dandanlicai.com'
             }, {
-                display: 'prod环境', value: 'prod.dandanlicai.com'
+                display: 'prod.dandanlicai.com', value: 'prod.dandanlicai.com'
             }];
             vm.branches = [{
                 display: 'master', value: 'master'
@@ -111,6 +118,10 @@
                 });
                 console.log(vm.deploy);
             };
+
+            $http.get('/backend/deploy/profiles').success(function(res) {
+                console.log(res);
+            });
 
         })
     ;

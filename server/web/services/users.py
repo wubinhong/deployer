@@ -57,6 +57,22 @@ class UsersService(Base):
                 return True
         return False
 
+    def get_user_info(self, session, apikey):
+        """
+        get user info by session
+        :param session:
+        :param apikey:
+        :return: None if session if expire or not exists
+        """
+        if self.is_login(session, apikey):
+            session = sessions.first(session=session)
+            if session is not None:
+                users.find()
+                user_info = users.get(session.user_id)
+                del user_info.password
+                return user_info
+        return None
+
     # def get_user_hosts(self, user, **kargs):
     #     if user.role == user.ROLE["ADMIN"]:
     #         return dict(hosts=hosts.all(kargs.get("offset"),
