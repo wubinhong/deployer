@@ -50,7 +50,7 @@
 
                 'responseError': function(rejection) {
 //                    growlService.danger(rejection.statusText);
-                    console.log(rejection);
+                    console.log('rejection', rejection);
                     if(angular.isObject(rejection.data)) {
                         growlService.danger(rejection.data.msg);
                     } else {

@@ -83,7 +83,7 @@ class Logger(object):
         self.stream = sh.stream
 
         if self.GLOBAL_FILENAME:
-            fh_all = logging.FileHandler(self.GLOBAL_FILENAME, 'a')
+            fh_all = logging.FileHandler(self.GLOBAL_FILENAME, 'a', 'utf-8')
             fh_all.setFormatter(formatter)
             fh_all.setLevel(logging.DEBUG)
             self.logger.addHandler(fh_all)

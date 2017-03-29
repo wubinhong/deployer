@@ -3,8 +3,8 @@ __author__ = 'wubinhong'
 import random
 import string
 from hashlib import md5
-from flask import request, jsonify
-from sqlalchemy import or_
+from flask import request, jsonify, g
+from sqlalchemy import or_, and_
 
 from .auth import authorize
 from web import app
@@ -92,3 +92,30 @@ def delete_by_id(ids):
     for id in ids.split(','):
         users.delete(id)
     return jsonify(dict(code=0, msg='删除成功！'))
+
+
+@app.route("/user/me", methods=["PUT"])
+@authorize
+def update_me():
+    user_params = request.get_json()
+    new_name = user_params.get('name')
+    criterion = and_(Users.id != g.user.id, Users.name == new_name)
+    if users.count(criterion=criterion) > 0:
+        # return jsonify(dict(code=13002, msg='登录名%s已经被占用了！' % new_name))
+        raise Error(13002, '登录名%s已经被占用了！' % new_name)
+
+    users.update(g.user,
+                 name=new_name, apikey=user_params.get('apikey'), email=user_params.get('email'),
+                 gender=user_params.get('gender'), nick=user_params.get('nick'), phone=user_params.get('phone'))
+    return jsonify(dict(code=0, msg='更新成功！'))
+
+
+@app.route("/user/me/password", methods=["PATCH"])
+@authorize
+def change_password():
+    print(g.user)
+    params = request.get_json()
+    print(params)
+    users.change_user_password(g.user.id, params.get('oldPassword'), params.get('newPassword'))
+    return jsonify(dict(code=0, msg='密码修改成功！'))
+

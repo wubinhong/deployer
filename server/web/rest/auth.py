@@ -45,7 +45,7 @@ def session_info(func):
 
 
 @app.route("/auth/login", methods=["POST"])
-def api_user_login():
+def auth_login():
     body = request.get_json()
     login_info = users.login(body['username'], body['password'])
     return jsonify(dict(code=0, data=login_info))

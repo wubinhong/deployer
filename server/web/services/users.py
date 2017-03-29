@@ -73,7 +73,24 @@ class UsersService(Base):
                 return user_info
         return None
 
-    # def get_user_hosts(self, user, **kargs):
+    def change_user_password(self, user_id, old_password, new_password):
+        """
+        change password
+        :param user_id:
+        :param new_password:
+        :return:
+        """
+        user = users.first(id=user_id)
+        # validate old password
+        old_password = md5(old_password.encode("utf-8")).hexdigest().upper()
+        if old_password != user.password:
+            raise Error(13003)
+        new_password = md5(new_password.encode("utf-8")).hexdigest().upper()
+        print('new_password encrypted:', new_password)
+
+        users.update(user, password=new_password)
+
+        # def get_user_hosts(self, user, **kargs):
     #     if user.role == user.ROLE["ADMIN"]:
     #         return dict(hosts=hosts.all(kargs.get("offset"),
     #                                     kargs.get("limit"),

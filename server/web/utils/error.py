@@ -21,6 +21,7 @@ class Error(Exception):
         13000: "username or password incorrect",
         13001: "user not exists",
         13002: "user exists",
+        13003: "password not matched",
         # 权限校验
         14000: "user not login",
         }

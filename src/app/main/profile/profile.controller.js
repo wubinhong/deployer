@@ -25,8 +25,9 @@
             var vm = this;
 
             // page init
-            $http.get('/backend/admin/user/' + $cookies.getObject('user').uid).then(function(res) {
-                vm.user = res.data.data;
+            $http.get('/backend/user/' + $cookies.getObject('user').id).success(function(res) {
+                vm.user = res.data;
+                console.log(vm.user);
             });
             vm.editInfo = 0;
             vm.genders = [{
@@ -49,9 +50,9 @@
             // events
             vm.submit = function() {
                 vm.user.password = '123';   //  避免不能更新
-                $http.put('/backend/admin/user/' + vm.user.id, vm.user).then(function(response) {
-                    if(response.data.status === 'success') {
-                        growlService.success('更新成功！');
+                $http.put('/backend/user/me', vm.user).success(function(res) {
+                    if(res.code === 0) {
+                        growlService.success(res.msg);
                         vm.editInfo = 0;
                     }
                 });
@@ -68,9 +69,9 @@
         .controller('ProfileModalController', function($scope, $uibModalInstance, $http, growlService) {
 
             $scope.reset = function () {
-                $http.patch('/backend/admin/auth/password/reset', $scope.password).then(function(res) {
-                    if(res.data.status === 'success') {
-                        growlService.success(res.data.message);
+                $http.patch('/backend/user/me/password', $scope.password).success(function(res) {
+                    if(res.code === 0) {
+                        growlService.success(res.msg);
                     }
                     $uibModalInstance.close();
                 });

@@ -70,12 +70,12 @@
                 <div class="pmbb-body p-l-30">
                     <div class="pmbb-view" data-ng-if="profileCtrl.editInfo === 0">
                         <dl class="dl-horizontal">
-                            <dt>姓名</dt>
+                            <dt>登陆名</dt>
                             <dd>{{ profileCtrl.user.name }}</dd>
                         </dl>
                         <dl class="dl-horizontal">
-                            <dt>用户名</dt>
-                            <dd>{{ profileCtrl.user.username }}</dd>
+                            <dt>昵称</dt>
+                            <dd>{{ profileCtrl.user.nick }}</dd>
                         </dl>
                         <dl class="dl-horizontal">
                             <dt>性别</dt>
@@ -83,25 +83,21 @@
                         </dl>
                         <dl class="dl-horizontal">
                             <dt>电话</dt>
-                            <dd>{{ profileCtrl.user.phoneNum }}</dd>
+                            <dd>{{ profileCtrl.user.phone }}</dd>
                         </dl>
                         <dl class="dl-horizontal">
                             <dt>email</dt>
                             <dd>{{ profileCtrl.user.email }}</dd>
                         </dl>
                         <dl class="dl-horizontal">
-                            <dt>身份证号</dt>
-                            <dd>{{ profileCtrl.user.idCard }}</dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt>备注</dt>
-                            <dd>{{ profileCtrl.user.remark }}</dd>
+                            <dt>免密API key</dt>
+                            <dd>{{ profileCtrl.user.apikey }}</dd>
                         </dl>
                     </div>
 
                     <form data-ng-submit="profileCtrl.submit()" class="pmbb-edit" data-ng-if="profileCtrl.editInfo === 1">
                         <dl class="dl-horizontal">
-                            <dt class="p-t-10">姓名</dt>
+                            <dt class="p-t-10">登录名</dt>
                             <dd>
                                 <div class="fg-line">
                                     <input data-ng-model="profileCtrl.user.name" type="text" class="form-control" value="{{ profileCtrl.user.name }}" placeholder="请输入姓名">
@@ -109,10 +105,10 @@
                             </dd>
                         </dl>
                         <dl class="dl-horizontal">
-                            <dt class="p-t-10">用户名</dt>
+                            <dt class="p-t-10">昵称</dt>
                             <dd>
                                 <div class="fg-line">
-                                    <input data-ng-model="profileCtrl.user.username" type="text" class="form-control" value="{{ profileCtrl.user.username }}" placeholder="请输入登陆用户名">
+                                    <input data-ng-model="profileCtrl.user.nick" type="text" class="form-control" value="{{ profileCtrl.user.nick }}" placeholder="请输入登陆用户名">
                                 </div>
                             </dd>
                         </dl>
@@ -131,7 +127,7 @@
                             <dt class="p-t-10">电话</dt>
                             <dd>
                                 <div class="fg-line">
-                                    <input data-ng-model="profileCtrl.user.phoneNum" type="text" class="form-control" value="{{ profileCtrl.user.phoneNum }}" placeholder="请输入电话">
+                                    <input data-ng-model="profileCtrl.user.phone" type="text" class="form-control" value="{{ profileCtrl.user.phone }}" placeholder="请输入电话">
                                 </div>
                             </dd>
                         </dl>
@@ -144,18 +140,10 @@
                             </dd>
                         </dl>
                         <dl class="dl-horizontal">
-                            <dt class="p-t-10">身份证号</dt>
+                            <dt class="p-t-10">免密API key</dt>
                             <dd>
                                 <div class="fg-line">
-                                    <input data-ng-model="profileCtrl.user.idCard" type="text" class="form-control" value="{{ profileCtrl.user.idCard }}" placeholder="请输入身份证号">
-                                </div>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">备注</dt>
-                            <dd>
-                                <div class="fg-line">
-                                    <input data-ng-model="profileCtrl.user.remark" type="text" class="form-control" value="{{ profileCtrl.user.remark }}" placeholder="请输入备注">
+                                    <input data-ng-model="profileCtrl.user.apikey" type="text" class="form-control" value="{{ profileCtrl.user.apikey }}" placeholder="请输入身份证号">
                                 </div>
                             </dd>
                         </dl>

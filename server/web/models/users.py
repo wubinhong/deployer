@@ -11,6 +11,8 @@ class Users(JsonSerializer, db.Model):
     name = db.Column(db.String(32))
     password = db.Column(db.String(64))
     role = db.Column(db.Integer, default=2)
+    nick = db.Column(db.String(32))
+    gender = db.Column(db.Enum('MALE', 'FEMALE'))
     email = db.Column(db.String(64))
     phone = db.Column(db.String(16))
     apikey = db.Column(db.String(64))
