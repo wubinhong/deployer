@@ -60,7 +60,7 @@ def singleton(cls, *args, **kw):
     return _singleton
 
 
-FORMAT = '[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s'
+FORMAT = '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)s - %(funcName)20s()] : %(message)s'
 
 
 class Logger(object):

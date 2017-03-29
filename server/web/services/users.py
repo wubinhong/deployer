@@ -86,7 +86,7 @@ class UsersService(Base):
         if old_password != user.password:
             raise Error(13003)
         new_password = md5(new_password.encode("utf-8")).hexdigest().upper()
-        print('new_password encrypted:', new_password)
+        logger.info('new_password encrypted: %s' % new_password)
 
         users.update(user, password=new_password)
 

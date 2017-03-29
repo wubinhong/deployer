@@ -9,10 +9,12 @@ from sqlalchemy import or_, and_
 from .auth import authorize
 from web import app
 from web.utils.error import Error
+from web.utils.log import Logger
 from web.models.users import Users
 from web.services.users import users
 from web.utils.params import get_page, get_size, get_order_by, get_desc
 
+logger = Logger("web.rest.user").logger
 
 @app.route('/user/stats', methods=['GET'])
 @authorize
@@ -57,7 +59,8 @@ def reset_password(id):
 # 获取某个用户的信息
 @app.route("/user/<int:id>", methods=["GET"])
 @authorize
-def api_get_host_by_id(id):
+def api_get_user_by_id(id):
+    logger.info('get user info[%s]' % id)
     return jsonify(dict(code=0, data=users.get(id)))
 
 
@@ -113,9 +116,7 @@ def update_me():
 @app.route("/user/me/password", methods=["PATCH"])
 @authorize
 def change_password():
-    print(g.user)
     params = request.get_json()
-    print(params)
     users.change_user_password(g.user.id, params.get('oldPassword'), params.get('newPassword'))
     return jsonify(dict(code=0, msg='密码修改成功！'))
 
