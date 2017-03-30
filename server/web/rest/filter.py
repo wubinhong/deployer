@@ -30,6 +30,7 @@ def log_request_info(response):
     stats_info['req_body'] = request.get_data()
     stats_info['X-Dandan-Client'] = headers.get('X-Dandan-Client')
     stats_info['X-Dandan-Token'] = headers.get('X-Dandan-Token')
+    stats_info['status'] = response.status
     stats_info['time_cost'] = time.time() - g.request_start
     stats_info['res'] = json.loads(str(response.data, 'utf-8'))
 
@@ -41,7 +42,7 @@ def pretty_map(stats_map):
     map_2_str = ''
     for k, v in stats_map.items():
         map_2_str += '%20s : %s\n' % (k, v)
-    return map_2_str
+    return map_2_str + '-' * 100 + '\n'
 
 
 @app.errorhandler(Error)
