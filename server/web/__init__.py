@@ -22,4 +22,4 @@ db_session = db.session
 
 
 # from .rest import api, webhooks, login, deploys, project, host, users
-from .rest import error, auth, api, user, deploy
+from .rest import filter, auth, api, user, deploy

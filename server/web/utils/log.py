@@ -7,6 +7,7 @@ v1.0.1:
     判断logger属性是否已经有handler，若有则不再需要增加handler
 """
 import logging
+from logging import handlers
 import platform
 __version__ = '1.0.1'
 __author__ = 'Binhong Wu'
@@ -60,12 +61,12 @@ def singleton(cls, *args, **kw):
     return _singleton
 
 
-FORMAT = '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)s - %(funcName)20s()] : %(message)s'
+FORMAT = '%(asctime)s %(levelname)s [%(pathname)s:%(lineno)s] : %(message)s'
 
 
 class Logger(object):
     DEBUG_MODE = False
-    GLOBAL_FILENAME = 'default.log'
+    GLOBAL_FILENAME = 'logs/default.log'
 
     def __init__(self, name, filename=None):
         self.logger = logging.getLogger(name)
@@ -83,13 +84,13 @@ class Logger(object):
         self.stream = sh.stream
 
         if self.GLOBAL_FILENAME:
-            fh_all = logging.FileHandler(self.GLOBAL_FILENAME, 'a', 'utf-8')
+            fh_all = handlers.TimedRotatingFileHandler(self.GLOBAL_FILENAME, when='D', backupCount=10, encoding='utf-8')
             fh_all.setFormatter(formatter)
             fh_all.setLevel(logging.DEBUG)
             self.logger.addHandler(fh_all)
 
         if filename is not None:
-            fh = logging.FileHandler(filename, 'a')
+            fh = handlers.TimedRotatingFileHandler(filename, when='D', backupCount=10, encoding='utf-8')
             fh.setFormatter(formatter)
             fh.setLevel(logging.DEBUG)
             self.logger.addHandler(fh)
